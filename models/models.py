@@ -1,3 +1,4 @@
+from utils.eca import eca_layer
 from utils.google_utils import *
 from utils.layers import *
 from utils.parse_config import *
@@ -50,7 +51,8 @@ def create_modules(module_defs, img_size, cfg):
                 modules.add_module('activation', Swish())
             elif mdef['activation'] == 'mish':
                 modules.add_module('activation', Mish())
-
+        elif mdef['type'] == 'eca':
+            modules = eca_layer()
         elif mdef['type'] == 'deformableconvolutional':
             bn = mdef['batch_normalize']
             filters = mdef['filters']
