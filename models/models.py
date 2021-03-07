@@ -56,8 +56,8 @@ def create_modules(module_defs, img_size, cfg):
         elif mdef['type'] == 'se':
             modules = SELayer(channel=512)
         elif mdef['type'] == 'cbam':
-            modules.add_module(Channel_Attention(channel=512,r=16))
-            modules.add_module(Spartial_Attention(kernel_size=1))
+            modules.add_module("CAM", Channel_Attention(channel=512,r=16))
+            modules.add_module("SAM", Spartial_Attention(kernel_size=1))
         elif mdef['type'] == 'deformableconvolutional':
             bn = mdef['batch_normalize']
             filters = mdef['filters']
