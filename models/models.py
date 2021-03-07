@@ -1,4 +1,4 @@
-from utils.eca import eca_layer
+from utils.eca import eca_layer, SELayer, Channel_Attention, Spartial_Attention
 from utils.google_utils import *
 from utils.layers import *
 from utils.parse_config import *
@@ -53,6 +53,11 @@ def create_modules(module_defs, img_size, cfg):
                 modules.add_module('activation', Mish())
         elif mdef['type'] == 'eca':
             modules = eca_layer()
+        elif mdef['type'] == 'se':
+            modules = SELayer(channel=512)
+        elif mdef['type'] == 'cbam':
+            modules.add_module(Channel_Attention(channel=512,r=16))
+            modules.add_module(Spartial_Attention(kernel_size=1))
         elif mdef['type'] == 'deformableconvolutional':
             bn = mdef['batch_normalize']
             filters = mdef['filters']
