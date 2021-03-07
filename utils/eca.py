@@ -69,6 +69,7 @@ class Channel_Attention(nn.Module):
 
 
     def forward(self, x):
+        print("CBAM!!");
         y1 = self.__avg_pool(x)
         y1 = self.__fc(y1)
 
