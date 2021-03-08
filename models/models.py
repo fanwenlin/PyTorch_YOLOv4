@@ -52,11 +52,11 @@ def create_modules(module_defs, img_size, cfg):
             elif mdef['activation'] == 'mish':
                 modules.add_module('activation', Mish())
         elif mdef['type'] == 'eca':
-            modules = eca_layer()
+            modules = eca_layer(channel=output_filters[-1])
         elif mdef['type'] == 'se':
-            modules = SELayer(channel=512)
+            modules = SELayer(channel=output_filters[-1])
         elif mdef['type'] == 'cbam':
-            modules.add_module("CAM", Channel_Attention(channel=512,r=16))
+            modules.add_module("CAM", Channel_Attention(channel=output_filters[-1],r=16))
             modules.add_module("SAM", Spartial_Attention(kernel_size=1))
         elif mdef['type'] == 'deformableconvolutional':
             bn = mdef['batch_normalize']

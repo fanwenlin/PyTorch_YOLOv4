@@ -297,7 +297,7 @@ def train(hyp, opt, device, tb_writer=None):
             if ema is not None:
                 ema.update_attr(model)
             final_epoch = epoch + 1 == epochs
-            if not opt.notest or final_epoch:  # Calculate mAP
+            if not opt.no or final_epoch:  # Calculate mAP
                 results, maps, times = test.test(opt.data,
                                                  batch_size=batch_size,
                                                  imgsz=imgsz_test,

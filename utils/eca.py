@@ -2,6 +2,7 @@ import torch
 from torch import nn
 from torch.nn.parameter import Parameter
 from math import log
+
 class eca_layer(nn.Module):
     """Constructs a ECA module.
 
@@ -56,7 +57,7 @@ class Channel_Attention(nn.Module):
 
     def __init__(self, channel, r):
         super(Channel_Attention, self).__init__()
-
+        print(channel)
         self.__avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         self.__max_pool = nn.AdaptiveMaxPool2d((1, 1))
 
@@ -78,7 +79,6 @@ class Channel_Attention(nn.Module):
 
         y = self.__sigmoid(y1+y2)
         return x * y
-
 
 class Spartial_Attention(nn.Module):
 
